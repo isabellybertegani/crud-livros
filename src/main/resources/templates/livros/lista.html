@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Biblioteca - Livros</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topo">
+    <h1>📚 Biblioteca</h1>
+    <p>Cadastro de livros &middot; UMC</p>
+</header>
+
+<main class="container">
+    <div class="alerta sucesso" th:if="${mensagem}" th:text="${mensagem}"></div>
+
+    <div class="barra">
+        <form class="busca" th:action="@{/livros}" method="get">
+            <input type="text" name="busca" th:value="${busca}" placeholder="Buscar por título...">
+            <button type="submit" class="btn">Buscar</button>
+            <a th:if="${busca}" th:href="@{/livros}" class="btn btn-claro">Limpar</a>
+        </form>
+        <a th:href="@{/livros/novo}" class="btn btn-principal">+ Novo livro</a>
+    </div>
+
+    <table class="tabela">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Ano</th>
+            <th>Gênero</th>
+            <th class="acoes">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="livro : ${livros}">
+            <td th:text="${livro.id}">1</td>
+            <td th:text="${livro.titulo}">Título</td>
+            <td th:text="${livro.autor}">Autor</td>
+            <td th:text="${livro.ano}">2000</td>
+            <td th:text="${livro.genero}">Gênero</td>
+            <td class="acoes">
+                <a th:href="@{/livros/editar/{id}(id=${livro.id})}" class="btn btn-editar">Editar</a>
+                <form th:action="@{/livros/excluir/{id}(id=${livro.id})}" method="post"
+                      onsubmit="return confirm('Deseja realmente excluir este livro?');">
+                    <button type="submit" class="btn btn-excluir">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(livros)}">
+            <td colspan="6" class="vazio">Nenhum livro encontrado.</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
