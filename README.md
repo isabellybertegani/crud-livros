@@ -2,7 +2,7 @@
 
 Atividade Prática em Sala (UMC): CRUD com **Spring Boot, JPA, Thymeleaf e MySQL**.
 
-**Alunos:** _(preencher)_ · **Tema:** Livro
+**Alunos:** Isabelly Bertegani, Mariana Santos e Lais Tiburcio · **Tema:** Livro
 
 ## Como rodar
 
